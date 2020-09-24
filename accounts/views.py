@@ -24,6 +24,10 @@ class CustomUserViewSet(viewsets.ModelViewSet):
     serializer_class = CustomUserSerializer
     # permission_classes = [is_user]
 
+    # def create(self, request, *args, **kwargs):
+
+    
+
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', False)
         instance = self.get_object()

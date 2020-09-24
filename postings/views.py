@@ -28,10 +28,9 @@ class UserPostingList(generics.ListCreateAPIView):
         This view should return a list of all the Posting
         for the currently authenticated user.
         """
-        # print("user is :", self.request.user)
-        # print(user, "is the current user")
+        print("request", self.request)
         user = self.request.user
-        return Posting.objects.filter(owner=user)
+        return Posting.objects.filter(author=user)
 
     def perform_create(self, serializer):
         return super().perform_create(serializer)

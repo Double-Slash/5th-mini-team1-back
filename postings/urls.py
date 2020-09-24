@@ -11,7 +11,7 @@ urlpatterns = [
     # path('upload/', views.ImageUploadView.as_view()),
     path('admin/', views.AdminPostingList.as_view()),
     path('<int:pk>/', views.PosintDetail.as_view()),
-    path('', views.PosintDetail.as_view()),
+    path('', views.UserPostingList.as_view()),
 ]
 
 

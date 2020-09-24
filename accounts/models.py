@@ -5,14 +5,19 @@ from django.contrib.auth.models import AbstractUser
 
 class Interest(models.Model):
     name = models.CharField(max_length=100)
+    
+    def __str__(self):
+        return self.name
 
 
 class CustomUser(AbstractUser):
     # written_posts = models.ManyToManyField('postings.Posting')
-    bookmarked_posts = models.ManyToManyField('postings.Posting', related_name='bookmarked_by')
+    # bookmarked_posts = models.ManyToManyField('postings.Posting',
+    #                                         related_name='bookmarked_by',
+    #                                         blank=True)
     birthday = models.DateField(null=True)
     location = models.CharField(max_length=100, null=True)
-    interests = models.ManyToManyField(Interest)
+    interests = models.ManyToManyField(Interest, blank=True)
 
     def __str__(self):
         return self.username
