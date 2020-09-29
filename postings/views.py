@@ -28,7 +28,7 @@ class UserPostingList(generics.ListCreateAPIView):
         This view should return a list of all the Posting
         for the currently authenticated user.
         """
-        print("request", self.request)
+        #print("request", self.request)
         user = self.request.user
         return Posting.objects.filter(author=user)
 

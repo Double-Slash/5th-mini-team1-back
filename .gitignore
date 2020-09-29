@@ -150,3 +150,5 @@ dmypy.json
 
 # my stuff
 deploy.sh
+*.service
+static
