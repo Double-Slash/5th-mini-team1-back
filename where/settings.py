@@ -130,6 +130,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
+#STATICFILES_DIRS = [
+#    "/home/doubleslash/5th-mini-team1-back/static",
+#]
+
 
 # my stuff
 AUTH_USER_MODEL = 'accounts.CustomUser'
