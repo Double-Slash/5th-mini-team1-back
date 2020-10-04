@@ -1,0 +1,5 @@
+# to see what ports are being used by what apps
+sudo lsof -i:<port number>
+
+# see ports being used
+netstat -ano

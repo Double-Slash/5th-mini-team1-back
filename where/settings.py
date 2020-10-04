@@ -27,7 +27,11 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+if DEBUG:
+    BACKEND_HOST = '*'
+else:
+    BACKEND_HOST = config('BACKEND_HOST')
+ALLOWED_HOSTS = [BACKEND_HOST]
 
 
 # Application definition
@@ -43,6 +47,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'drf_yasg',
     'django_extensions',
+    'corsheaders',
     # my apps
     'accounts',
     'postings',
@@ -50,6 +55,9 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    # my middleware
+    'corsheaders.middleware.CorsMiddleware',
+    # default django middleware
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -147,3 +155,11 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ),
 }
+
+if DEBUG:
+    FRONT_ORIGIN = '*'
+else:
+    FRONT_ORIGIN = config('FRONT_ORIGIN')
+CORS_ALLOWED_ORIGINS = [
+    FRONT_ORIGIN,
+]
