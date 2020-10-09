@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'drf_yasg',
     'django_extensions',
     'corsheaders',
+    'haystack',
+    'elasticsearch',
     #'channels',
     # my apps
     'chats',
@@ -63,7 +65,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -167,11 +169,33 @@ else:
     ]
 
 
+
+# social login
 REST_FRAMEWORK = { 'DEFAULT_AUTHENTICATION_CLASSES': 
         ('rest_framework.authentication.TokenAuthentication',),
         'DEFAULT_PERMISSION_CLASSES': ( 'rest_framework.permissions.IsAuthenticated',)}
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
+
+
+# search
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': 'http://127.0.0.1:9200/',
+        'INDEX_NAME': 'haystack',
+    },
+}
+
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
+# ELASTICSEARCH_DSL = {
+#     'default': {
+#         'hosts': 'elasticsearch:9200'
+#     },
+# }
+
+
 
 # CHANNEL_LAYERS = {
 #     "default": {

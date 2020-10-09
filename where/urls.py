@@ -55,6 +55,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', ping, name='ping'),
     path('accounts/', include('accounts.urls')),
+    path('postings/search/', include('haystack.urls')),
     path('postings/', include('postings.urls')),
     path('chats/', include('chats.urls')),
     # path('clothing/', include('clothes.urls')),

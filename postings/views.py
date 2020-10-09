@@ -42,3 +42,30 @@ class PostingDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Posting.objects.all()
     serializer_class = PostingSerializer
     # permission_classes = [is_owner]
+
+
+# seach
+from django.shortcuts import render
+from rest_framework.decorators import (
+    api_view, renderer_classes,
+)
+from .models import Posting
+from haystack.query import SearchQuerySet
+ 
+from rest_framework.response import Response
+# Create your views here.
+ 
+ 
+@api_view(['POST'])
+def seach_posting(request):
+    title = request.data['title']
+    posting = SearchQuerySet().models(Posting).autocomplete(
+        first_name__startswith=title)
+ 
+    searched_data = []
+    for i in posting:
+        all_results = {"title": i.title,
+                       }
+        searched_data.append(all_results)
+ 
+    return Response(searched_data)
