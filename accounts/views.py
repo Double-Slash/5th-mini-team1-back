@@ -77,3 +77,41 @@ class CustomLogin(ObtainAuthToken):
         user = serializer.validated_data['user']
         token, created = Token.objects.get_or_create(user=user)
         return Response({'token': token.key, 'pk': user.pk})
+
+
+
+# social login
+from django.contrib.auth.models import User
+from django.conf import settings
+
+from google.auth.transport import requests
+from google.oauth2 import id_token
+from google.auth.transport import requests
+
+from rest_framework import status
+from rest_framework.authtoken.models import Token
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
+
+@api_view(['POST',])
+@permission_classes((AllowAny,))
+def exchange_token(request):
+    token = request.data.get('token')
+    print(token)
+    CLIENT_ID = settings.SOCIAL_AUTH_GOOGLE_OAUTH2_KEY
+    print(CLIENT_ID, 'DEBUGG!!!!!\n\n\n\n')
+    idinfo = id_token.verify_oauth2_token(token, requests.Request(), CLIENT_ID)
+    print(idinfo, 'DEBUGG!!!!!\n\n\n\n')
+
+    if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
+        raise ValueError('Wrong issuer.')
+
+    try:
+        user = User.objects.get(email=idinfo['email'])
+        if not user:
+            return Response({'error': 'Auth failed'}, status=status.HTTP_401_UNAUTHORIZED)
+        token, _ = Token.objects.get_or_create(user=user)
+        return Response({'token': token.key}, status=status.HTTP_200_OK)
+    except Exception as ex:
+        return Response({'error': str(ex)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

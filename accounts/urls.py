@@ -12,5 +12,7 @@ router.register(r'', views.CustomUserViewSet)
 urlpatterns = [
     path('login/', views.CustomLogin.as_view()),
     path('logout/', views.Logout.as_view()),
+    path('social/', views.exchange_token),
+
 ]
 urlpatterns += router.urls
