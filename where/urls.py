@@ -20,6 +20,7 @@ from django.conf.urls import url
 from accounts import urls
 from accounts import urls
 from postings import urls
+from chats import urls
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from rest_framework import permissions
@@ -55,6 +56,7 @@ urlpatterns = [
     path('', ping, name='ping'),
     path('accounts/', include('accounts.urls')),
     path('postings/', include('postings.urls')),
+    path('chats/', include('chats.urls')),
     # path('clothing/', include('clothes.urls')),
     # path('weather/', include('weatherapi.urls')),
     # path('weatherapi/', include('weatherapi.urls')),

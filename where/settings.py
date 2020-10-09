@@ -48,7 +48,9 @@ INSTALLED_APPS = [
     'drf_yasg',
     'django_extensions',
     'corsheaders',
+    #'channels',
     # my apps
+    'chats',
     'accounts',
     'postings',
     'hashtags',
@@ -163,3 +165,14 @@ else:
     CORS_ALLOWED_ORIGINS = [
         FRONT_ORIGIN,
     ]
+
+
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "asgi_redis.RedisChannelLayer",
+#         "CONFIG": {
+#             "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
+#         },
+#         "ROUTING": "chat.routing.channel_routing",
+#     },
+# }

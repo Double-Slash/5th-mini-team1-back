@@ -18,7 +18,7 @@ class AdminPostingList(generics.ListCreateAPIView):
 
 
 
-# get the list of all clothes a specific user has
+# get the list of all Posting a specific user has
 class UserPostingList(generics.ListCreateAPIView):
     serializer_class = PostingSerializer
     queryset = Posting.objects.all()
@@ -38,7 +38,7 @@ class UserPostingList(generics.ListCreateAPIView):
 
 
 # get individual clothing, only works for owners
-class PosintDetail(generics.RetrieveUpdateDestroyAPIView):
+class PostingDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Posting.objects.all()
     serializer_class = PostingSerializer
     # permission_classes = [is_owner]
