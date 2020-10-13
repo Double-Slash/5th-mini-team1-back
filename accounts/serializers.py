@@ -8,7 +8,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
     class Meta:
         model = User
-        fields = ('username', 'password', 'interests', 'description', 'image')
+        fields = '__all__'
 
     def create(self, validated_data):
         # print(validated_data)

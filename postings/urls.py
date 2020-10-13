@@ -10,7 +10,9 @@ from . import views
 urlpatterns = [
     # path('upload/', views.ImageUploadView.as_view()),
     path('admin/', views.AdminPostingList.as_view()),
+    path('all/', views.AllPostingList.as_view()),
     path('<int:pk>/', views.PostingDetail.as_view()),
+    path('contests', views.AllContestList.as_view()),
     path('', views.UserPostingList.as_view()),
 ]
 

@@ -9,6 +9,15 @@ class PostingSerializer(serializers.ModelSerializer):
         # exclude = ['password']
         fields = '__all__'
 
+
+class ContestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Contest
+        # fields = ('title', 'content', 'author', 'deadline', 'hashtags', 'field', 'image')
+        # exclude = ['password']
+        fields = '__all__'
+
+
     # def create(self, validated_data):
     #     clothing_image = self.context.get("view").request.FILES
     #     instance = self.Meta.model.objects.create(**validated_data)

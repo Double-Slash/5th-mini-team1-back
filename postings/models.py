@@ -33,6 +33,16 @@ class Posting(models.Model):
     qualifications = models.TextField(null=True)
 
     
+class Contest(models.Model):
+    title = models.CharField(max_length=100, null=True)
+    deadline = models.DateTimeField(null=True)
+    host = models.CharField(max_length=100,  null=True)
+    host_info = models.CharField(max_length=100,  null=True)
+    award = models.CharField(max_length=100,  null=True)
+    detail = models.TextField()
+
+
+
 
     def __str__(self):
         return self.title

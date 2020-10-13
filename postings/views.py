@@ -7,13 +7,25 @@ from .serializers import *
 from .models import *
 from django.http import HttpResponse
 from rest_framework.parsers import MultiPartParser, FormParser
-
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 
 # only for admin, testin purposes
 class AdminPostingList(generics.ListCreateAPIView):
     queryset = Posting.objects.all()
     serializer_class = PostingSerializer
+    # permission_classes = [permissions.IsAdminUser]
+
+class AllPostingList(generics.ListAPIView):
+    permission_classes  = [AllowAny]
+    queryset = Posting.objects.all()
+    serializer_class = PostingSerializer
+    # permission_classes = [permissions.IsAdminUser]
+
+class AllContestList(generics.ListAPIView):
+    permission_classes  = [AllowAny]
+    queryset = Contest.objects.all()
+    serializer_class = ContestSerializer
     # permission_classes = [permissions.IsAdminUser]
 
 
