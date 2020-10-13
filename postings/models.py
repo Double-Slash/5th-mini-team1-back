@@ -24,6 +24,7 @@ class Posting(models.Model):
     hashtags = models.ManyToManyField('hashtags.DefaultTag',
                                     related_name="postings",
                                     blank=True)
+    
 
     def __str__(self):
         return self.title
