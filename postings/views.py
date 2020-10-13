@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework.parsers import FileUploadParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework import status, viewsets, permissions, generics, permissions
+from rest_framework import status, viewsets, permissions, generics
 from .serializers import *
 from .models import *
 from django.http import HttpResponse

@@ -16,5 +16,14 @@ class CustomUserSerializer(serializers.ModelSerializer):
         return instance
 
 
+class ExperienceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Experience
+        fields = '__all__'
+
+    # def create(self, validated_data):
+    #     # print(validated_data)
+    #     instance = self.Meta.model.objects.create_user(**validated_data)
+    #     return instance
 
 

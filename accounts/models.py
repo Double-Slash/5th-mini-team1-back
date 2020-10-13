@@ -11,10 +11,10 @@ class Interest(models.Model):
 
 
 class CustomUser(AbstractUser):
-    # written_posts = models.ManyToManyField('postings.Posting')
-    # bookmarked_posts = models.ManyToManyField('postings.Posting',
-    #                                         related_name='bookmarked_by',
-    #                                         blank=True)
+    written_posts = models.ManyToManyField('postings.Posting', blank=True)
+    bookmarked_posts = models.ManyToManyField('postings.Posting',
+                                            related_name='bookmarked_by',
+                                            blank=True)
     birthday = models.DateField(null=True)
     location = models.CharField(max_length=100, null=True)
     interests = models.ManyToManyField(Interest, blank=True)
@@ -23,6 +23,17 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.username
+
+class Experience(models.Model):
+    date = models.DateField(null=True)
+    title = models.CharField(max_length=100, null=True)
+    detail = models.TextField(null=True)
+    person = models.ForeignKey(CustomUser, related_name='experience', 
+                                    on_delete=models.CASCADE,
+                                    null=True)
+
+
+
 
 # 유저:
 # pk

@@ -25,7 +25,13 @@ class Posting(models.Model):
                                     related_name="postings",
                                     blank=True)
     image = models.ImageField(null=True)
-    
+    location = models.TextField(null=True)
+    team_name = models.CharField(max_length=100, null=True)
+    team_description = models.TextField(null=True)
+    project_description = models.TextField(null=True)
+    guide_text = models.TextField(null=True)
+    qualifications = models.TextField(null=True)
+
     
 
     def __str__(self):

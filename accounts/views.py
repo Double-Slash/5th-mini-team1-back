@@ -1,8 +1,8 @@
 from django.shortcuts import render
 
 from rest_framework import viewsets, status
-from accounts.models import CustomUser
-from accounts.serializers import CustomUserSerializer
+from accounts.models import *
+from accounts.serializers import *
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -12,6 +12,14 @@ from rest_framework.authtoken.serializers import AuthTokenSerializer
 from rest_framework.compat import coreapi, coreschema
 from rest_framework.response import Response
 from rest_framework.schemas import ManualSchema
+
+from django.shortcuts import render
+from rest_framework.response import Response
+from rest_framework import status, viewsets, permissions, generics
+from .serializers import *
+from .models import *
+from rest_framework.parsers import MultiPartParser, FormParser
+
 
 # from .permissions import is_user
 
@@ -80,6 +88,25 @@ class CustomLogin(ObtainAuthToken):
 
 
 
+
+class ExperienceList(generics.ListCreateAPIView):
+    serializer_class = ExperienceSerializer
+    queryset = Experience.objects.all()
+
+    def get_queryset(self):
+        """
+        This view should return a list of all the Posting
+        for the currently authenticated user.
+        """
+        #print("request", self.request)
+        user = self.request.user
+        return Experience.objects.filter(person=user)
+
+    def perform_create(self, serializer):
+        return super().perform_create(serializer)
+
+
+
 # social login
 from django.contrib.auth.models import User
 from django.conf import settings
@@ -115,3 +142,4 @@ def exchange_token(request):
         return Response({'token': token.key}, status=status.HTTP_200_OK)
     except Exception as ex:
         return Response({'error': str(ex)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+

@@ -13,6 +13,6 @@ urlpatterns = [
     path('login/', views.CustomLogin.as_view()),
     path('logout/', views.Logout.as_view()),
     path('social/', views.exchange_token),
-
+    path('experience/', views.ExperienceList.as_view()),
 ]
 urlpatterns += router.urls
