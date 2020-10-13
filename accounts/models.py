@@ -18,6 +18,8 @@ class CustomUser(AbstractUser):
     birthday = models.DateField(null=True)
     location = models.CharField(max_length=100, null=True)
     interests = models.ManyToManyField(Interest, blank=True)
+    description = models.TextField(null=True)
+    image = models.ImageField(null=True)
 
     def __str__(self):
         return self.username

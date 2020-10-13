@@ -5,7 +5,7 @@ from .models import *
 class PostingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Posting
-        fields = ('title', 'content', 'author', 'deadline' 'hashtags', 'field')
+        fields = ('title', 'content', 'author', 'deadline' 'hashtags', 'field', 'image')
 
     # def create(self, validated_data):
     #     clothing_image = self.context.get("view").request.FILES

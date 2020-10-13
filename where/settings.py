@@ -178,6 +178,13 @@ REST_FRAMEWORK = { 'DEFAULT_AUTHENTICATION_CLASSES':
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
 
 
+
+
+# media for image uploads
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+
 # search
 HAYSTACK_CONNECTIONS = {
     'default': {
@@ -188,6 +195,9 @@ HAYSTACK_CONNECTIONS = {
 }
 
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
+
+
 
 # ELASTICSEARCH_DSL = {
 #     'default': {
