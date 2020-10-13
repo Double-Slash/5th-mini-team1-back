@@ -20,7 +20,14 @@ class CustomUser(AbstractUser):
     interests = models.ManyToManyField(Interest, blank=True)
     description = models.TextField(null=True)
     image = models.ImageField(null=True)
-
+    want_to_say = models.TextField(null=True)
+    hashtags = models.ManyToManyField('hashtags.DefaultTag',
+                                related_name="users",
+                                blank=True)
+    field = models.ForeignKey('postings.PostingType',
+                            related_name='user',
+                            on_delete=models.DO_NOTHING,
+                            null=True)
     def __str__(self):
         return self.username
 
