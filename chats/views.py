@@ -40,15 +40,32 @@ class SpecificChatList(generics.ListAPIView):
 
     def get_queryset(self):
         """
-        This view should return a list of all the Messages
-        for the currently authenticated user.
+        This view should return a list of all the chats sent from a 'sender'
         """
         #print("request", self.request)
         sender = self.request.data.get('sender')
+        recipient = self.request.user
         print('sender is', sender)
-        return Chat.objects.filter(sender=sender)
+        return Chat.objects.filter(sender=sender, recipient=recipient)
+
 
 
 class ChatDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Chat.objects.all()
     serializer_class = ChatSerializer
+
+    # def get_queryset(self):
+    #     """
+    #     This view should return a list of all the Chats
+    #     for the currently authenticated user.
+    #     """
+    #     #print("request", self.request)
+    #     user = self.request.user
+    #     print(user, 'user')
+    #     return Chat.objects.filter(recipient=user)
+
+
+    # def get_queryset(self):
+    #     user = self.request.user
+    #     return Chat.objects.filter(receipient=user)
+    # # return Chat.objects.filter(recipient=user)

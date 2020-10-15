@@ -8,8 +8,8 @@ from . import views
 
 
 urlpatterns = [
-    path('from/<int:pk>', views.SpecificChatList.as_view()),
-    path('<int:pk>/', views.ChatDetail.as_view()),
+    path('from/', views.SpecificChatList.as_view()),
+    # path('<int:pk>/', views.ChatDetail.as_view()),
     path('', views.AllChatList.as_view()),
 ]
 

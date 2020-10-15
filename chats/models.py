@@ -9,6 +9,8 @@ class Chat(models.Model):
     sender = models.ForeignKey('accounts.CustomUser',
                         on_delete=models.DO_NOTHING,
                         related_name='send_messages') # on delete cascade?
+    time = models.DateTimeField(auto_now=True)
+
 
 
     def __str__(self):
