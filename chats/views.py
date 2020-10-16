@@ -7,7 +7,7 @@ from .serializers import *
 from .models import *
 from django.http import HttpResponse
 from rest_framework.parsers import MultiPartParser, FormParser
-
+from django.db.models import Q
 
 
 
@@ -43,10 +43,14 @@ class SpecificChatList(generics.ListAPIView):
         This view should return a list of all the chats sent from a 'sender'
         """
         #print("request", self.request)
-        sender = self.request.data.get('sender')
+        sender = self.request.GET.get('sender')
         recipient = self.request.user
         print('sender is', sender)
-        return Chat.objects.filter(sender=sender, recipient=recipient)
+        filter = Q(sender=sender, recipient=recipient) | Q(sender=recipient, recipient=sender)
+
+        return Chat.objects.filter(filter).order_by('time')
+
+        #return Chat.objects.filter(sender=sender, recipient=recipient)
 
 
 
